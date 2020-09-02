@@ -1,0 +1,2 @@
+runtime: java11
+entrypoint: 'java -cp "lib/*" com.altairix.jetty.root.AdfJetty logger.war'

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.altairix.test</groupId>
+    <artifactId>logger-error</artifactId>
+    <version>0</version>
+  </parent>
+
+  <artifactId>logging-client</artifactId>
+  <packaging>gwt-app</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-dev</artifactId>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.elemental2/elemental2-core -->
+    <dependency>
+      <groupId>com.google.elemental2</groupId>
+      <artifactId>elemental2-core</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.elemental2/elemental2-dom -->
+    <dependency>
+      <groupId>com.google.elemental2</groupId>
+      <artifactId>elemental2-dom</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.elemental2/elemental2-webstorage -->
+    <dependency>
+      <groupId>com.google.elemental2</groupId>
+      <artifactId>elemental2-webstorage</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <resources>
+      <!-- Include the GWT xml files in the jar -->
+      <resource>
+        <directory>${basedir}/src/main/java</directory>
+        <includes>
+          <include>**/*.gwt.xml</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <plugins>
+      <!-- GWT Compiler and Settings -->
+      <plugin>
+        <groupId>net.ltgt.gwt.maven</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <moduleName>com.altairix.gwt.LoggerAppManager</moduleName>
+          <moduleShortName>Logger</moduleShortName>
+          <draftCompile>false</draftCompile>
+        </configuration>
+      </plugin>
+      <!-- This is so that when gwt compiles it is able to find the source files -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

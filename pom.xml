@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.altairix.test</groupId>
+  <artifactId>logger-error</artifactId>
+  <version>0</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>client</module>
+    <module>http</module>
+    <module>server</module>
+  </modules>
+
+  <properties>
+    <!-- Don't install or deploy these projects -->
+    <maven.deploy.skip>true</maven.deploy.skip>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jetty.version>9.4.31.v20200723</jetty.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt</artifactId>
+        <version>2.9.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+
+    <plugins>
+      <!-- GWT Compiler -->
+      <plugin>
+        <groupId>net.ltgt.gwt.maven</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <configuration>
+          <launcherDir>${project.basedir}/target/gwt/devmode/war</launcherDir>
+          <devmodeArgs>
+            <devmodeArgs>-noserver</devmodeArgs>
+            <devmodeArgs>-generateJsInteropExports</devmodeArgs>
+          </devmodeArgs>
+          <compilerArgs>
+            <compilerArg>-generateJsInteropExports</compilerArg>
+          </compilerArgs>
+          <localWorkers>2</localWorkers>
+          <extra>${project.build.directory}/gwt/extra</extra>
+          <deploy>${project.build.directory}/gwt/deploy</deploy>
+        </configuration>
+      </plugin>
+    </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
+          <configuration>
+            <release>11</release>
+          </configuration>
+        </plugin>
+        <!-- GWT Compiler -->
+        <plugin>
+          <groupId>net.ltgt.gwt.maven</groupId>
+          <artifactId>gwt-maven-plugin</artifactId>
+          <version>1.0.0</version>
+          <extensions>true</extensions>
+          <configuration>
+            <sourceLevel>1.8</sourceLevel>
+            <failOnError>true</failOnError>
+          </configuration>
+        </plugin>
+        <!-- Compile the source with the jar -->
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.0.1</version>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <phase>package</phase>
+              <goals>
+                <goal>jar-no-fork</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+</project>
