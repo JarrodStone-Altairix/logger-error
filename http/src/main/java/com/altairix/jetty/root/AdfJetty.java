@@ -30,7 +30,7 @@ public class AdfJetty {
       System.err.println("Usage: need a relative path to the war file to execute");
       System.exit(1);
     }
-    System.setProperty("java.util.logging.config.file", "logging.properties");
+    // System.setProperty("java.util.logging.config.file", "logging.properties");
     System.setProperty("org.eclipse.jetty.util.log.class", "org.eclipse.jetty.util.log.StrErrLog");
     System.setProperty("org.eclipse.jetty.LEVEL", "INFO");
 

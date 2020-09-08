@@ -1,2 +1,3 @@
 runtime: java11
-entrypoint: 'java -cp "lib/*" com.altairix.jetty.root.AdfJetty logger.war'
+entrypoint: 'java -cp "lib/*" -Djava.util.logging.config.file=logging.properties com.altairix.jetty.root.AdfJetty logger.war'
+instance_class: F2
